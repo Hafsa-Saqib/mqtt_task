@@ -44,7 +44,7 @@ class _MQTTViewState extends State<MQTTView> {
     final MQTTAppState appState = Provider.of<MQTTAppState>(context);
     // Keep a reference to the app state.
     currentAppState = appState;
-    final Scaffold scaffold = Scaffold(body: _buildColumn());
+    final SafeArea scaffold = SafeArea(child: Scaffold(body: _buildColumn()));
     return scaffold;
   }
 
@@ -90,6 +90,7 @@ class _MQTTViewState extends State<MQTTView> {
       children: <Widget>[
         Expanded(
           child: Container(
+            padding: ,
             color: status == 'Disconnected' ? Colors.red : status == 'Connecting' ? Colors.white : status == 'Connected' ? Colors.green : Colors.white,
             height: 50.0,
             child: Text(status, textAlign: TextAlign.center),
@@ -140,7 +141,7 @@ class _MQTTViewState extends State<MQTTView> {
         Expanded(
           // ignore: deprecated_member_use
           child: RaisedButton(
-            color: Colors.lightBlueAccent,
+            color: Colors.green,
             child: const Text('ON'),
             onPressed: state == MQTTAppConnectionState.disconnected
                 ? _configureAndConnect
@@ -194,7 +195,7 @@ class _MQTTViewState extends State<MQTTView> {
       osPrefix = 'Flutter_Android';
     }
     manager = MQTTManager(
-        host: _hostTextController.text,
+        host: 'broker.hivemq.com',
         topic: _topicTextController.text,
         identifier: osPrefix,
         state: currentAppState);
