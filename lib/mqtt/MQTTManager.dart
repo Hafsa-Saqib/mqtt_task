@@ -32,7 +32,6 @@ class MQTTManager {
 
     /// Add the successful connection callback
     _client!.onConnected = onConnected;
-    _client!.onSubscribed = onSubscribed;
 
     final MqttConnectMessage connMess = MqttConnectMessage()
         .withClientIdentifier(_identifier)
@@ -70,10 +69,6 @@ class MQTTManager {
     _client!.publishMessage(_topic, MqttQos.exactlyOnce, builder.payload!);
   }
 
-  /// The subscribed callback
-  void onSubscribed(String topic) {
-    print('EXAMPLE::Subscription confirmed for topic $topic');
-  }
 
   /// The unsolicited disconnect callback
   void onDisconnected() {
